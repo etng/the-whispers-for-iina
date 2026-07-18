@@ -16,6 +16,8 @@ whispersctl setup
 
 `whispersctl setup` 会显示组件计划并要求确认；它不会把大型模型打进安装包，也不会重复复制系统中已有、能够复用的 Hugging Face 或 whisper.cpp 模型。
 
+如果尚未完成设置，IINA Overlay 会直接提示，不再假装任务已经进入后台队列；worker 无响应时也会给出重新连接入口。播放时可在字幕卡片右上角临时暂停字幕功能，或打开设置即时调整九档字号、三档宽度、三套皮肤和 35%–100% 背景透明度。
+
 可用安装档位：
 
 - `viewer`：只安装 IINA 插件，用于查看已有字幕。
@@ -29,6 +31,12 @@ whispersctl setup
 whispersctl doctor
 whispersctl models scan
 whispersctl worker status
+```
+
+已有字幕可以先脱敏整理为本地草稿；只有增加 `--submit` 并再次确认后，才会通过 GitHub Pull Request 公开字幕、ASS 和媒体匹配信息，不会上传音视频、本机路径、模型或日志：
+
+```shell
+whispersctl contribution current "/path/to/video.mkv"
 ```
 
 卸载程序但保留字幕库和共享模型：
