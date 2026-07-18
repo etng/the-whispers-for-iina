@@ -6,7 +6,7 @@
 
 ## 安装
 
-当前公开版本支持 Apple Silicon Mac（macOS 13 或更高版本）。推荐使用 Homebrew：
+当前公开版本支持 Apple Silicon 与 Intel Mac（macOS 13 或更高版本）。推荐使用 Homebrew：
 
 ```shell
 brew tap etng/tap
@@ -14,13 +14,15 @@ brew install the-whispers-for-iina
 whispersctl setup
 ```
 
-`whispersctl setup` 会显示组件计划并要求确认；它不会把大型模型打进安装包，也不会重复复制系统中已有、能够复用的 Hugging Face 或 whisper.cpp 模型。
+Homebrew 会自动选择机器架构。Apple Silicon 可使用完整的本地生成链路；Intel Mac 安装轻量只看版，不下载模型、不做本地转写，只按媒体指纹从公开字幕仓库取得其他机器贡献的 ASS 与 Overlay 数据。
+
+Apple Silicon 上，`whispersctl setup` 会显示组件计划并要求确认；它不会把大型模型打进安装包，也不会重复复制系统中已有、能够复用的 Hugging Face 或 whisper.cpp 模型。
 
 如果尚未完成设置，IINA Overlay 会直接提示，不再假装任务已经进入后台队列；worker 无响应时也会给出重新连接入口。播放时可在字幕卡片右上角临时暂停字幕功能，或打开设置即时调整九档字号、三档宽度、三套皮肤和 35%–100% 背景透明度。
 
 可用安装档位：
 
-- `viewer`：只安装 IINA 插件，用于查看已有字幕。
+- `viewer`：安装轻量在线匹配服务，用于查看公开或已有字幕；Intel Mac 固定使用此档位。
 - `local-asr`：只做本地英语/日语识别，不翻译。
 - `standard`：默认档位，本地识别并翻译为中文；如果没有配置精校服务，会直接发布初译结果。
 - `custom`：交互选择组件。
@@ -50,7 +52,7 @@ brew uninstall the-whispers-for-iina
 
 每个 [GitHub Release](https://github.com/etng/the-whispers-for-iina/releases) 都包含：
 
-- Apple Silicon 运行包（`.tar.gz`）
+- Apple Silicon 完整运行包与 Intel 只看运行包（各自独立的 `.tar.gz`）
 - IINA 插件（`.iinaplgz`）
 - Python wheel（供集成与审计使用）
 - `SHA256SUMS`、发行清单和验证报告
@@ -58,10 +60,10 @@ brew uninstall the-whispers-for-iina
 ## 当前边界
 
 - 公开包尚未使用 Apple Developer ID 签名和 notarization；Homebrew 是当前推荐安装路径。
-- Intel Mac 构建与验证尚未完成。
+- Intel x86_64 只看包已用真正的 Intel Python 经 Rosetta 完成公开仓库命中验证；物理 Intel Mac 复核仍待完成。
 - 当前使用 `whispersctl` 完成组件选择和维护；图形化安装管理器留作后续版本。
 
-这些边界会明确记录在每个发行版本中，不影响现有 Apple Silicon + Homebrew 安装链路。
+这些边界会明确记录在每个发行版本中，不影响现有 Homebrew 安装链路。
 
 ## 许可证
 
