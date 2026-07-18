@@ -31,7 +31,8 @@ whispersctl setup --profile viewer
 - 6 项集成测试通过。
 - 28 项 IINA 插件测试通过。
 - 从发行包完成隔离安装、真实两分钟媒体识别、ASS 生成和安全卸载。
-- Homebrew formula 通过格式检查；发布后还会从公开地址重新安装验证。
+- 发行资源已从公开 Release 重新下载并通过 SHA-256 校验。
+- Homebrew formula 通过格式与审计检查，并已从公开地址完成安装和自测。
 
 详细机器可读结果见本 Release 中的 `validation-report.json`。
 
